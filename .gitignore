@@ -127,3 +127,5 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+~$per translation.docx
+~WRL0005.tmp
