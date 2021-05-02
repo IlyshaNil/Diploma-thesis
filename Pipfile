@@ -4,12 +4,18 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-tensorflow = {path = "./tensorflow-1.12.0-cp36-cp36m-win_amd64.whl"}
 matplotlib = "*"
 xlrd = "*"
 xlsxwriter = "*"
+sklearn = "*"
+numpy = "*"
+h5py = "~=2.10.0"
+pandas = "*"
+tensorflow = {path = "./tensorflow-1.12.0-cp36-cp36m-win_amd64.whl"}
+keras = "*"
 
 [dev-packages]
+autopep8 = "*"
 
 [requires]
 python_version = "3.6"

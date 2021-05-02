@@ -7,13 +7,13 @@ import xlsxwriter
 
 #  "ml.xlsx", "mloutput.xlsx" are training set.
 print("10%")
-workbook1 = xlrd.open_workbook(r'I:\ml.xlsx')
+workbook1 = xlrd.open_workbook(r'D:\testdata\2_1.xls')
 sheet1 = workbook1.sheet_by_index(0)
 x_data = np.zeros(shape=(25876,17))
 for i in range(0,25876):
     x_data[i] =  sheet1.row_values(i+1)
     
-workbook2 = xlrd.open_workbook(r'I:\mloutput.xlsx')
+workbook2 = xlrd.open_workbook(r'D:\testdata\2_2.xls')
 sheet2 = workbook2.sheet_by_index(0)
 y_data = np.zeros(shape=(25876,1))
 for m in range(0,25876):
@@ -21,13 +21,13 @@ for m in range(0,25876):
 
 #  "t1_1", "t1_2" are test set.
 
-workbook3 = xlrd.open_workbook(r'I:\t1_1.xlsx')
+workbook3 = xlrd.open_workbook(r'D:\testdata\1.xls')
 sheet3 = workbook3.sheet_by_index(0)
 x_t = np.zeros(shape=(663,17))
 for a in range(0,662):
     x_t[a] =  sheet3.row_values(a)
     
-workbook4 = xlrd.open_workbook(r'I:\t1_2.xlsx')
+workbook4 = xlrd.open_workbook(r'D:\testdata\1.xls')
 sheet4 = workbook4.sheet_by_index(0)
 y_t = np.zeros(shape=(663,1))
 for b in range(0,662):
