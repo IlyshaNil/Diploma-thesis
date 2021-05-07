@@ -5,7 +5,7 @@ import numpy as np
 import random
 import math
 import sys
-
+import matplotlib.pyplot as plt
 # helper functions
 
 def loadFile(df):
@@ -337,42 +337,56 @@ class NeuralNetwork:
 # end class NeuralNetwork
 
 def main():
-  print("\nBegin NN back-propagation demo \n")
   pv = sys.version
   npv = np.version.version 
   print("Using Python version " + str(pv) +
     "\n and NumPy version "  + str(npv))
   
   numInput = 2
-  numHidden = 10
+  numHidden = 7
   numOutput = 2
-  print("\nCreating a %d-%d-%d neural network " %
-    (numInput, numHidden, numOutput) )
-  nn = NeuralNetwork(numInput, numHidden, numOutput, seed=3)
+  LRList = [0.05, 0.2, 0.03, 0.4, 0.5, 0.75]
+  accTrainList = []
   
-  print("\nLoading training and test data ")
-  trainDataPath = r"D:\User\Downloads\0617vsm_McCaffrey\irisTrainData.txt"
-  trainDataMatrix = loadFile(trainDataPath)
-  print("\nTest data: ")
-  showMatrixPartial(trainDataMatrix, 4, 1, True)
-  testDataPath = r"D:\User\Downloads\0617vsm_McCaffrey\irisTestData.txt"
-  testDataMatrix = loadFile(testDataPath)
+  accTestList = []
+  for elm in LRList:
+    print("\nCreating a %d-%d-%d neural network " %
+      (numInput, numHidden, numOutput) )
+    nn = NeuralNetwork(numInput, numHidden, numOutput, seed=2)
   
-  maxEpochs = 50
-  learnRate = 0.05
-  print("\nSetting maxEpochs = " + str(maxEpochs))
-  print("Setting learning rate = %0.3f " % learnRate)
-  print("\nStarting training")
-  nn.train(trainDataMatrix, maxEpochs, learnRate)
-  print("Training complete")
+    print("\nLoading training and test data ")
+    trainDataPath = r"D:\User\Downloads\0617vsm_McCaffrey\irisTrainData.txt"
+    trainDataMatrix = loadFile(trainDataPath)
+    print("\nTest data: ")
+    showMatrixPartial(trainDataMatrix, 4, 1, True)
+    testDataPath = r"D:\User\Downloads\0617vsm_McCaffrey\irisTestData.txt"
+    testDataMatrix = loadFile(testDataPath)
+  #plt.plot(testDataMatrix)    
+  #plt.grid()
+  #plt.show()      
   
-  accTrain = nn.accuracy(trainDataMatrix)
-  accTest = nn.accuracy(testDataMatrix)
+    maxEpochs = 10
+    learnRate = elm
+    print("\nSetting maxEpochs = " + str(maxEpochs))
+    print("Setting learning rate = %0.3f " % learnRate)
+    print("\nStarting training")
+    nn.train(trainDataMatrix, maxEpochs, learnRate)
+    print("Training complete")
   
-  print("\nAccuracy on 120-item train data = %0.4f " % accTrain)
-  print("Accuracy on 30-item test data   = %0.4f " % accTest)
+    accTrain = nn.accuracy(trainDataMatrix)
+    accTest = nn.accuracy(testDataMatrix)
   
-  print("\nEnd demo \n")
+    accTrainList.append(accTrain)
+    accTestList.append(accTest)
+  
+    print("\nAccuracy on train data = %0.4f " % accTrain)
+    print("Accuracy on test data   = %0.4f " % accTest)
+
+  
+  plt.plot(accTrainList, LRList, accTestList, LRList)
+  plt.grid()
+  plt.show() 
+  
    
 if __name__ == "__main__":
   main()
