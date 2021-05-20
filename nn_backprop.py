@@ -347,6 +347,7 @@ def main():
   numOutput = 2
   LRList = [0.05, 0.2, 0.03, 0.4, 0.5, 0.75]
   accTrainList = []
+  counter228 = 0
   
   accTestList = []
   for elm in LRList:
@@ -381,6 +382,8 @@ def main():
   
     print("\nAccuracy on train data = %0.4f " % accTrain)
     print("Accuracy on test data   = %0.4f " % accTest)
+    counter228 += 1
+    print("СЧЕТЧИК: "+ counter228)  
 
   
   plt.plot(accTrainList, LRList, accTestList, LRList)
